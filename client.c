@@ -1,9 +1,8 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <signal.h>
 #include <unistd.h>
 #include <string.h>
-
+#include <stdlib.h>
+#include <signal.h>
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
@@ -21,7 +20,7 @@ void	ft_putchar(char c)
 // 	}
 // }
 
-int cov(int nbr)
+int cov(int nbr,int k)
 {
 
     int str[8];
@@ -29,30 +28,32 @@ int cov(int nbr)
    
     if (nbr < 2)
     {
-        printf("%d" , nbr);
-        str[i++] = nbr;
+
+        if (nbr == 0)
+            kill(k,SIGUSR1);
+        if (nbr == 1)
+            kill(k,SIGUSR2);
+            usleep(100);
+        
+        
     }
     else 
     {
-        cov(nbr / 2);
-        cov(nbr % 2);
+        cov(nbr / 2,k);
+        cov(nbr % 2,k);
     }
     return(str[2]);
 }
 int main(int argc, char *argv[])
 {
     
-    int x = '0';
-    printf("%d",cov(x));
+  
+        int i = atoi(argv[1]);
+        
+    cov(argv[2][0],i);
     //cov(x);
     // ft_putadd_hex(x);
-    // int i = atoi(argv[1]);
-    // if (argv[2][0] == 'c')
-    // {
-    //    kill(i,SIGUSR1);
-    // }
+
     
-    // if (argv[2][0] == 'd')
-    //     kill(i,SIGUSR2);
     return (0);
 }
