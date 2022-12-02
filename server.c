@@ -3,18 +3,33 @@
 #include <signal.h>
 #include <unistd.h>
 #include <string.h>
-
+int power(int i)
+{
+   int nb = 128;
+   while (i < 7)
+   {
+      nb = nb / 2;
+      i++;
+   }
+   return (nb);
+}
 void	handler_sigusr(int signn)
 {
-   static int i ;
-   static int c;
-   if (signn == SIGUSR1)
-      write(1, "0", 1);
+   static int i = 7;
+   static int count = 0;
     if (signn == SIGUSR2)
-      write(1, "1", 1);
-   
-   
+      count += power(i);
+      i--;
+      printf("%d \n",i);
+    if (i == 0)
+    {
+      printf("++++%d+++++",count);
+      i = 7;
+      count = 0;
+    }  
 }
+
+
 
 int	main(void)
 {
@@ -30,4 +45,7 @@ int	main(void)
    { 
       sleep(5);
    }
+
+   
+   return (0);
 }
