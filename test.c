@@ -23,41 +23,46 @@ char	*ft_strdup(char *s1)
 	b[i] = '\0';
 	return (b);
 }
-int position(nb)
+void shiftt(char *str)
 {
     int i = 0;
-    while (nb > 0)
+    while (i < 7)
     {
-        nb = nb / 2;
+        str[i] = str[i + 1];
         i++;
     }
-    
-    return (i - 1);
 }
 
-char* cov(int nb, char *bit)
-{
-    static int i = 3;
-   
+void cov(int nb, char *bit)
+{   
     if (nb < 2)
     {
-        bit[i] = nb + 48;
-        i--;
+        shiftt(bit);
+        bit[7] = nb + 48;
+    
     }else
     {
         cov(nb / 2,bit);
         cov(nb % 2,bit);
     }
-   
-
-   return (bit);
 }
+
+
 int main(int argc, char **argv)
 {
-
+    int i = 0;
     char *bit = ft_strdup("00000000");
-     printf("%s",cov(argv[1][0],bit));
-    //  printf("%d",position(48));
-   
+    cov(argv[2][0],bit);
+  while (i < 8)
+  {
+      if(bit[i] == '0')
+      kill(atoi(argv[1]),SIGUSR1);
+      if(bit[i] == '1')
+      kill(atoi(argv[1]),SIGUSR2);
+      i++;
+      usleep(100);
+  }
+  
     return (0);
 }
+
