@@ -16,21 +16,20 @@ int power(int i)
 void	handler_sigusr(int signn)
 {
    static int i = 7;
-   static int count = 0;
+   static unsigned char count = 0;
     if (signn == SIGUSR2)
       count += power(i);
       i--;
-      printf("%d \n",i);
-    if (i == 0)
+      
+    if (i == -1)
     {
-      printf("++++%d+++++",count);
+      printf("%c",count);
+      fflush(stdout);
       i = 7;
-      count = 0;
+count = 0;
     }  
+ 
 }
-
-
-
 int	main(void)
 {
    int nb = 0;
@@ -43,7 +42,7 @@ int	main(void)
 
    while (1)
    { 
-      sleep(5);
+      pause();
    }
 
    
