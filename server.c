@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/06 13:04:39 by abdel-ou          #+#    #+#             */
+/*   Updated: 2022/12/06 13:07:05 by abdel-ou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdio.h>
 #include <signal.h>
@@ -23,7 +35,7 @@ void	handler_sigusr(int signn)
       
     if (i == -1)
     {
-      printf("%c",count);
+      printf("%d",count);
       fflush(stdout);
       i = 7;
 count = 0;
@@ -44,7 +56,5 @@ int	main(void)
    { 
       pause();
    }
-
-   
    return (0);
 }

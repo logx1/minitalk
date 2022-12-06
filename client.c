@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/06 13:04:03 by abdel-ou          #+#    #+#             */
+/*   Updated: 2022/12/06 13:04:04 by abdel-ou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -53,6 +65,7 @@ void char_send(char *pid,int nb)
     int i = 0;
     char *bit = ft_strdup("00000000");
     cov(nb,bit);
+    printf("%s",bit);
   while (i < 8)
   {
       if(bit[i] == '0')
@@ -60,11 +73,11 @@ void char_send(char *pid,int nb)
       if(bit[i] == '1')
       kill(atoi(pid),SIGUSR2);
       i++;
-      usleep(50);
+      usleep(500);
+      
   }
+  free(bit);
 }
-
-
 
 int main(int argc, char **argv)
 {
@@ -75,9 +88,5 @@ int main(int argc, char **argv)
         char_send(argv[1],argv[2][i]);
         i++;
     }
-
-    
-
-   
     return (0);
 }
