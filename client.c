@@ -6,15 +6,11 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:04:03 by abdel-ou          #+#    #+#             */
-/*   Updated: 2022/12/11 15:20:53 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2022/12/11 17:19:48 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <signal.h>
+#include "minitalk.h"
 int j_ll;
 
 char	*ft_strdup(char *s1)
@@ -79,6 +75,7 @@ void char_send(char *pid,int nb)
 }
 void HHHH(int sig)
 {
+    (void)sig;
     static int l = 0;
   
         l++;
@@ -89,6 +86,7 @@ void HHHH(int sig)
 }
 int main(int argc, char **argv)
 {
+    (void)argc;
     j_ll = strlen(argv[2]);
     int i = 0;
     signal(SIGUSR1,HHHH);
