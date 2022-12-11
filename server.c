@@ -6,7 +6,7 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:04:39 by abdel-ou          #+#    #+#             */
-/*   Updated: 2022/12/09 12:58:07 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2022/12/11 14:02:52 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int power(int i)
    }
    return (nb);
 }
-void	handler_sigusr(int signn)
+static void	handler_sigusr(int signn, siginfo_t *siginfo, void *context)
 {
    static int i = 7;
    static unsigned char count = 0;
@@ -39,19 +39,23 @@ void	handler_sigusr(int signn)
       fflush(stdout);
       i = 7;
       count = 0;
+      kill(siginfo->si_pid,SIGUSR1);
     }  
  
 }
 int	main(void)
 {
    int nb = 0;
+   struct sigaction act;
    pid_t	pid;
 
+    act.sa_sigaction = &handler_sigusr;
+    act.sa_flags = SA_SIGINFO;
    pid = getpid();
    printf("PID: %d\n", pid);
-   signal(SIGUSR1, handler_sigusr);
-   signal(SIGUSR2, handler_sigusr);
-
+   sigaction(SIGUSR1, &act, NULL);
+   sigaction(SIGUSR2, &act, NULL);
+   
    while (1)
    { 
       pause();

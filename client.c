@@ -6,7 +6,7 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:04:03 by abdel-ou          #+#    #+#             */
-/*   Updated: 2022/12/07 19:42:09 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:20:53 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <signal.h>
+int j_ll;
 
 char	*ft_strdup(char *s1)
 {
@@ -52,7 +53,6 @@ void cov(int nb, char *bit)
     {
         shiftt(bit);
         bit[7] = nb + 48;
-        printf("%d",nb);
     
     }else
     {
@@ -73,18 +73,28 @@ void char_send(char *pid,int nb)
       if(bit[i] == '1')
       kill(atoi(pid),SIGUSR2);
       i++;
-      usleep(100);
+      usleep(180);
   }
   free(bit);
 }
-
+void HHHH(int sig)
+{
+    static int l = 0;
+  
+        l++;
+        if (l == j_ll)
+        {
+              printf("the message has been received successfully \n");
+        }
+}
 int main(int argc, char **argv)
 {
+    j_ll = strlen(argv[2]);
     int i = 0;
-    
+    signal(SIGUSR1,HHHH);
     while (argv[2][i])
     {
-        char_send(argv[1],(unsigned char)argv[2][i]);
+        char_send(argv[1] ,argv[2][i]);
         i++;
     }
     return (0);
