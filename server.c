@@ -6,7 +6,7 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:04:39 by abdel-ou          #+#    #+#             */
-/*   Updated: 2022/12/11 17:28:26 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2022/12/12 14:21:49 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,15 @@ static void	handler_sigusr(int signn, siginfo_t *siginfo, void *context)
 {
    (void)context;
    static int i = 7;
+   static int cpid ;
    static unsigned char count = 0;
+   if (cpid != siginfo->si_pid)
+   {
+      cpid = siginfo->si_pid;
+      i = 7;
+      count = 0;
+   }
+   
     if (signn == SIGUSR2)
       count += power(i);
       i--;
@@ -36,7 +44,7 @@ static void	handler_sigusr(int signn, siginfo_t *siginfo, void *context)
       fflush(stdout);
       i = 7;
       count = 0;
-      kill(siginfo->si_pid,SIGUSR1);
+      kill(cpid,SIGUSR1);
     }  
  
 }
