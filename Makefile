@@ -11,8 +11,9 @@
 # **************************************************************************** #
 
 NAME	=	minitalk
-SRCS1   =	client.c
-SRCS2   =	server.c
+SRCS1   =	client.c ft_printf/ft_printf.c ft_printf/ft_putchar.c ft_printf/ft_putstr.c ft_printf/ft_putnbr.c 
+
+SRCS2   =	server.c ft_printf/ft_printf.c ft_printf/ft_putchar.c ft_printf/ft_putstr.c ft_printf/ft_putnbr.c 
 
 
 
@@ -31,3 +32,8 @@ fclean:clean
 	rm -rf $(NAME)
 
 re:fclean all
+
+
+
+
+

@@ -6,12 +6,13 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:04:03 by abdel-ou          #+#    #+#             */
-/*   Updated: 2022/12/11 17:19:48 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2022/12/15 16:58:14 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-int j_ll;
+
+int	g_ll;
 
 char	*ft_strdup(char *s1)
 {
@@ -32,68 +33,77 @@ char	*ft_strdup(char *s1)
 	b[i] = '\0';
 	return (b);
 }
-void shiftt(char *str)
+
+void	shiftt(char	*str)
 {
-    int i = 0;
-    while (i < 7)
-    {
-        str[i] = str[i + 1];
-        i++;
-    }
+	int	i;
+
+	i = 0;
+	while (i < 7)
+	{
+		str[i] = str[i + 1];
+		i++;
+	}
 }
 
-void cov(int nb, char *bit)
-{   
-
-    if (nb < 2)
-    {
-        shiftt(bit);
-        bit[7] = nb + 48;
-    
-    }else
-    {
-        cov(nb / 2,bit);
-        cov(nb % 2,bit);
-    }
+void	cov(int nb, char *bit)
+{
+	if (nb < 2)
+	{
+		shiftt(bit);
+		bit[7] = nb + 48;
+	}
+	else
+	{
+		cov(nb / 2, bit);
+		cov(nb % 2, bit);
+	}
 }
 
-void char_send(char *pid,int nb)
+void	char_send(char *pid, int nb)
 {
-    int i = 0;
-    char *bit = ft_strdup("00000000");
-    cov(nb,bit);
-  while (i < 8)
-  {
-      if(bit[i] == '0')
-      kill(atoi(pid),SIGUSR1);
-      if(bit[i] == '1')
-      kill(atoi(pid),SIGUSR2);
-      i++;
-      usleep(180);
-  }
-  free(bit);
+	int		i;
+	char	*bit;
+
+	i = 0;
+	bit = ft_strdup("00000000");
+	cov(nb, bit);
+	while (i < 8)
+	{
+		if (bit[i] == '0')
+			kill(atoi(pid), SIGUSR1);
+		if (bit[i] == '1')
+			kill(atoi(pid), SIGUSR2);
+	i++;
+		usleep(950);
+	}
+	free(bit);
 }
-void HHHH(int sig)
+
+void	message_received(int sig)
 {
-    (void)sig;
-    static int l = 0;
-  
-        l++;
-        if (l == j_ll)
-        {
-              printf("the message has been received successfully \n");
-        }
+	static int	l;
+
+	(void)sig;
+	l++;
+	if (l == g_ll)
+	{
+		ft_printf("the message has been received successfully \n");
+	}
 }
-int main(int argc, char **argv)
+
+int	main(int argc, char **argv)
 {
-    (void)argc;
-    j_ll = strlen(argv[2]);
-    int i = 0;
-    signal(SIGUSR1,HHHH);
-    while (argv[2][i])
-    {
-        char_send(argv[1] ,argv[2][i]);
-        i++;
-    }
-    return (0);
+	int	i;
+
+	(void)argc;
+	i = 0;
+	g_ll = strlen(argv[2]);
+	signal(SIGUSR1, message_received);
+	while (argv[2][i])
+	{
+		char_send(argv[1], (unsigned char)argv[2][i]);
+		i++;
+	}
+	return (0);
 }
