@@ -55,6 +55,13 @@ int	main(void)
 {
 	struct sigaction	act;
 	pid_t				pid;
+	
+	
+	
+// 	sigemptyset(&act.sa_mask);
+	
+// 	act.sa_flags = 0;
+// 	act.sa_sigaction = handler;
 
 	act.sa_sigaction = &handler_sigusr;
 	act.sa_flags = SA_SIGINFO;
