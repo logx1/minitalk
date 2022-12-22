@@ -5,28 +5,59 @@
 #                                                     +:+ +:+         +:+      #
 #    By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/21 14:24:37 by abdel-ou          #+#    #+#              #
-#    Updated: 2022/10/23 13:29:03 by abdel-ou         ###   ########.fr        #
+#    Created: 2022/12/21 05:15:23 by abdel-ou          #+#    #+#              #
+#    Updated: 2022/12/22 21:28:15 by abdel-ou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= libftprintf.a
-SRCS=    ft_printf.c ft_putchar.c ft_putstr.c ft_putnbr.c ft_putnbr_x.c ft_putnbr_u.c ft_putadd.c
+#Variables
+NAME = minitalk.a
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+AR = ar rcs
+RM = rm -rf
 
-OBJS	= ${SRCS:%.c=%.o}
+CLIENT = client
+SERVER = server
 
-FLAGS	= -Wall -Wextra -Werror
+#Sources:
+SRC_S = server.c ft_printf/*.c libft/*.c
+SRC_C = client.c ft_printf/*.c libft/*.c
 
-$(NAME):
-	gcc $(FLAGS) -c $(SRCS) -I ./
-	ar rc $(NAME) $(OBJS)
+BONUS_S = server.c ft_printf/*.c libft/*.c
+BONUS_C = client.c ft_printf/*.c libft/*.c
 
-all:$(NAME)
+OBJ_S = $(SRC_S:%.c=%.o)
+OBJ_C = $(SRC_C:%.c=%.o)
+
+BONUS_OBJ_S = $(SRC_S:%.c=%.o)
+BONUS_OBJ_C = $(SRC_C:%.c=%.o)
+
+
+#Rules:
+all:$(SERVER) $(CLIENT)
+
+
+$(SERVER):
+	$(CC) $(SRC_S) $(CFLAGS) -o $(SERVER)
+
+$(CLIENT):
+	$(CC) $(SRC_C) $(CFLAGS) -o $(CLIENT)
+
+bonus:
+	@$(CC) $(BONUS_S) $(CFLAGS) -o $(SERVER)
+	@$(CC) $(BONUS_C) $(CFLAGS) -o $(CLIENT)
 
 clean:
-	rm -rf $(OBJS)
+	@$(RM) $(OBJ_S)
+	@$(RM) $(OBJ_C)
+	@$(RM) $(BONUS_OBJ_S)
+	@$(RM) $(BONUS_OBJ_C)
 
-fclean:clean
-	rm -rf $(NAME)
+fclean: clean
+	@$(RM) $(SERVER)
+	@$(RM) $(CLIENT)
+	@$(RM) $(NAME)
 
-re:fclean all
+re: fclean all
+
