@@ -6,7 +6,7 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:04:03 by abdel-ou          #+#    #+#             */
-/*   Updated: 2022/12/21 05:00:15 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2022/12/21 21:37:57 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	char_send(char *pid, int nb)
 		if (bit[i] == '1')
 			kill(atoi(pid), SIGUSR2);
 	i++;
-		usleep(200);
+		usleep(300);
 	}
 	free(bit);
 }
@@ -83,7 +83,7 @@ void	message_received(int sig)
 	l++;
 	if (l == g_ll)
 	{
-		ft_printf("the message has been received successfully \n");
+		ft_printf("the signal has been received successfully \n");
 	}
 }
 

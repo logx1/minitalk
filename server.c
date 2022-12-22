@@ -6,7 +6,7 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:04:39 by abdel-ou          #+#    #+#             */
-/*   Updated: 2022/12/21 05:14:51 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:14:44 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	handler_sigusr(int signn, siginfo_t *siginfo, void *context)
 		ft_printf("%c", count);
 		i = 7;
 		count = 0;
-		kill(cpid, SIGUSR1);
+		// kill(cpid, SIGUSR1);
 	}
 }
 

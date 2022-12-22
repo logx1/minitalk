@@ -6,7 +6,7 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:04:03 by abdel-ou          #+#    #+#             */
-/*   Updated: 2022/12/21 04:40:01 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2022/12/21 21:37:50 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	char_send(char *pid, int nb)
 		if (bit[i] == '1')
 			kill(atoi(pid), SIGUSR2);
 	i++;
-		usleep(200);
+		usleep(300);
 	}
 	free(bit);
 }
