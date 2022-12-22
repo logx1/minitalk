@@ -5,43 +5,28 @@
 #                                                     +:+ +:+         +:+      #
 #    By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/12/21 05:15:23 by abdel-ou          #+#    #+#              #
-#    Updated: 2022/12/21 22:41:17 by abdel-ou         ###   ########.fr        #
+#    Created: 2022/10/21 14:24:37 by abdel-ou          #+#    #+#              #
+#    Updated: 2022/10/23 13:29:03 by abdel-ou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME	= libftprintf.a
+SRCS=    ft_printf.c ft_putchar.c ft_putstr.c ft_putnbr.c ft_putnbr_x.c ft_putnbr_u.c ft_putadd.c
 
-NAME	=	minitalk
-SRCS1   =	client.c ft_printf/ft_printf.c ft_printf/ft_putchar.c ft_printf/ft_putstr.c ft_printf/ft_putnbr.c ft_printf/ft_strlen.c
-
-SRCS2   =	server.c ft_printf/ft_printf.c ft_printf/ft_putchar.c ft_printf/ft_putstr.c ft_printf/ft_putnbr.c 
-
-SRCS_bonus1   =	client_bonus.c ft_printf/ft_printf.c ft_printf/ft_putchar.c ft_printf/ft_putstr.c ft_printf/ft_putnbr.c ft_printf/ft_strlen.c
-
-SRCS_bonus2  =	server_bonus.c ft_printf/ft_printf.c ft_printf/ft_putchar.c ft_printf/ft_putstr.c ft_printf/ft_putnbr.c 
-
+OBJS	= ${SRCS:%.c=%.o}
 
 FLAGS	= -Wall -Wextra -Werror
 
+$(NAME):
+	gcc $(FLAGS) -c $(SRCS) -I ./
+	ar rc $(NAME) $(OBJS)
+
 all:$(NAME)
 
-$(NAME):
-	gcc $(FLAGS) -o client $(SRCS1) 
-	gcc $(FLAGS) -o server $(SRCS2) 
-
-bonus :
-	cc $(FLAGS) -o client $(SRCS_bonus1) 
-	cc $(FLAGS) -o server $(SRCS_bonus2) 
-
 clean:
-	rm -rf client server
+	rm -rf $(OBJS)
 
 fclean:clean
 	rm -rf $(NAME)
 
 re:fclean all
-
-
-
-
-
