@@ -6,13 +6,11 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:04:03 by abdel-ou          #+#    #+#             */
-/*   Updated: 2022/12/22 20:15:18 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2022/12/25 16:37:13 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
-int	g_ll;
 
 void	cov(int nb, char *bit)
 {
@@ -55,26 +53,12 @@ void	char_send(char *pid, int nb)
 	free(bit);
 }
 
-void	message_received(int sig)
-{
-	static int	l;
-
-	(void)sig;
-	l++;
-	if (l == g_ll)
-	{
-		ft_printf("the message has been received successfully \n");
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	int	i;
 
 	(void)argc;
 	i = 0;
-	g_ll = ft_strlen(argv[2]);
-	signal(SIGUSR1, message_received);
 	while (argv[2][i])
 	{
 		char_send(argv[1], (unsigned char)argv[2][i]);

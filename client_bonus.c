@@ -6,33 +6,13 @@
 /*   By: abdel-ou <abdel-ou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:04:03 by abdel-ou          #+#    #+#             */
-/*   Updated: 2022/12/21 21:37:57 by abdel-ou         ###   ########.fr       */
+/*   Updated: 2022/12/25 15:52:43 by abdel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
 int	g_ll;
-
-char	*ft_strdup(char *s1)
-{
-	int		i;
-	int		s;
-	char	*b;
-
-	s = ft_strlen(s1);
-	i = 0;
-	b = malloc(sizeof(char ) * (s + 1));
-	if (!b)
-		return (0);
-	while (s1[i] != 0)
-	{
-		b[i] = s1[i];
-		i++;
-	}
-	b[i] = '\0';
-	return (b);
-}
 
 void	cov(int nb, char *bit)
 {
